@@ -143,7 +143,7 @@ Options:
        --title title               Issue title.
        --body content              Issue content.
        --assignee username         Github username of assigned user.
-       --milestone number          Number of associated milestone.
+       --milestone number          Associated milestone number.
        --labels label1,label2,...  Issue labels.
 ```
 
