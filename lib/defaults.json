@@ -1,10 +1,9 @@
 {
 	"protocol": "https",
 	"hostname": "api.github.com",
-	"port": 443,
+	"port": null,
 	"pathname": "/repos/",
 	"method": "POST",
 	"useragent": "https://github.com/kgryte/github-create-issue",
-	"accept": "application/vnd.github.v3+json",
-	"title": ""
+	"accept": "application/vnd.github.v3+json"
 }

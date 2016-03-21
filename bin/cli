@@ -80,9 +80,6 @@ if ( token ) {
 if ( args.useragent ) {
 	opts.useragent = args.useragent;
 }
-if ( args.title ) {
-	opts.title = args.title;
-}
 if ( args.body ) {
 	opts.body = args.body;
 }
@@ -99,7 +96,7 @@ if ( args.labels ) {
 
 // CREATE ISSUE //
 
-create( args._[0], opts, clbk );
+create( args._[0], args.title, opts, clbk );
 
 /**
 * FUNCTION: clbk( error, issue, info )
