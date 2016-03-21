@@ -50,7 +50,7 @@ The `function` accepts the following `options`:
 *   __useragent__: [user agent][github-user-agent] `string`.
 *   __body__: issue content.
 *   __assignee__: Github username of assigned user.
-*   __milestone__: number of associated milestone.
+*   __milestone__: associated milestone `number`.
 *   __labels__: `array` of associated labels.
 
 
