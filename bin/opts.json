@@ -1,0 +1,26 @@
+{
+	"string": [
+		"token",
+		"useragent",
+		"title",
+		"body",
+		"assignee",
+		"milestone",
+		"labels"
+	],
+	"boolean": [
+		"help",
+		"version"
+	],
+	"alias": {
+		"help": [
+			"h"
+		],
+		"version": [
+			"V"
+		],
+		"useragent": [
+			"ua"
+		]
+	}
+}

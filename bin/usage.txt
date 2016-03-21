@@ -1,0 +1,15 @@
+
+Usage: ghcreateissue [options] slug
+
+Options:
+
+  -h,  --help                      Print this message.
+  -V,  --version                   Print the package version.
+       --token token               Github access token.
+  -ua, --useragent ua              User agent.
+       --title title               Issue title.
+       --body content              Issue content.
+       --assignee username         Github username of assigned user.
+       --milestone number          Number of associated milestone.
+       --labels label1,label2,...  Issue labels.
+

@@ -1,0 +1,124 @@
+#!/usr/bin/env node
+'use strict';
+
+// MODULES //
+
+var fs = require( 'fs' );
+var path = require( 'path' );
+var parseArgs = require( 'minimist' );
+var notifier = require( 'update-notifier' );
+var pkg = require( './../package.json' );
+var opts = require( './opts.json' );
+var create = require( './../lib' );
+
+
+// VARIABLES //
+
+var token;
+var args;
+
+
+// FUNCTIONS //
+
+/**
+* FUNCTION: onClose()
+*	Callback invoked upon writing a file to `stdout`.
+*
+* @private
+*/
+function onClose() {
+	process.exit( 0 );
+}
+
+
+// INIT //
+
+process.stdout.on( 'error', process.exit );
+
+
+// PACKAGE UPDATES //
+
+notifier( { 'pkg': pkg } ).notify();
+
+
+// ARGUMENTS //
+
+args = parseArgs( process.argv.slice( 2 ), opts );
+
+
+// HELP //
+
+if ( args.help ) {
+	fs.createReadStream( path.join( __dirname, 'usage.txt' ) )
+		.pipe( process.stdout )
+		.on( 'close', onClose );
+    return;
+}
+
+
+// VERSION //
+
+if ( args.version ) {
+	console.log( pkg.version );
+	return;
+}
+
+
+// OPTIONS //
+
+opts = {};
+
+if ( args.token ) {
+	token = args.token;
+}
+else if ( process.env.GITHUB_TOKEN ) {
+	token = process.env.GITHUB_TOKEN;
+}
+if ( token ) {
+	opts.token = token;
+}
+if ( args.useragent ) {
+	opts.useragent = args.useragent;
+}
+if ( args.title ) {
+	opts.title = args.title;
+}
+if ( args.body ) {
+	opts.body = args.body;
+}
+if ( args.assignee ) {
+	opts.assignee = args.assignee;
+}
+if ( args.milestone ) {
+	opts.milestone = parseInt( args.milestone, 10 );
+}
+if ( args.labels ) {
+	opts.labels = args.labels.split( ',' );
+}
+
+
+// CREATE ISSUE //
+
+create( args._[0], opts, clbk );
+
+/**
+* FUNCTION: clbk( error, issue, info )
+*	Callback invoked upon creating an issue.
+*
+* @private
+* @param {Error|Null} error - error object
+* @param {Object} issue - issue information
+* @param {Object} info - rate limit info
+* @returns {Void}
+*/
+function clbk( error, issue, info ) {
+	if ( info ) {
+		process.stderr.write( JSON.stringify( info )+'\n', 'utf8' );
+	}
+	if ( error ) {
+		process.stderr.write( error.message+'\n', 'utf8' );
+		return process.exit( 1 );
+	}
+	process.stdout.write( JSON.stringify( issue )+'\n', 'utf8' );
+	process.exit( 0 );
+}
