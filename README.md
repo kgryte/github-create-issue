@@ -25,23 +25,23 @@ var createIssue = require( 'github-create-issue' );
 
 ``` javascript
 var opts = {
-	'token': 'tkjorjk34ek3nj4!'
+    'token': 'tkjorjk34ek3nj4!'
 };
 
 createIssue( 'kgryte/test-repo1', 'Big bug.', opts, clbk );
 
 function clbk( error, issue, info ) {
-	// Check for rate limit information...
-	if ( info ) {
-		console.error( 'Limit: %d', info.limit );
-		console.error( 'Remaining: %d', info.remaining );
-		console.error( 'Reset: %s', (new Date( info.reset*1000 )).toISOString() );
-	}
-	if ( error ) {
-		throw new Error( error.message );
-	}
-	console.log( JSON.stringify( issue ) );
-	// returns <issue_data>
+    // Check for rate limit information...
+    if ( info ) {
+        console.error( 'Limit: %d', info.limit );
+        console.error( 'Remaining: %d', info.remaining );
+        console.error( 'Reset: %s', (new Date( info.reset*1000 )).toISOString() );
+    }
+    if ( error ) {
+        throw new Error( error.message );
+    }
+    console.log( JSON.stringify( issue ) );
+    // returns <issue_data>
 }
 ```
 
@@ -78,10 +78,10 @@ createIssue( 'kgryte/test-repo1', 'Big bug.', opts, clbk );
 
 ## Notes
 
-*	[Rate limit][github-rate-limit] information includes the following:
-	-	__limit__: maximum number of requests a consumer is permitted to make per hour.
-	-	__remaining__: number of remaining requests.
-	-	__reset__: time at which the current [rate limit][github-rate-limit] window resets in [UTC seconds][unix-time].
+*   [Rate limit][github-rate-limit] information includes the following:
+    -   __limit__: maximum number of requests a consumer is permitted to make per hour.
+    -   __remaining__: number of remaining requests.
+    -   __reset__: time at which the current [rate limit][github-rate-limit] window resets in [UTC seconds][unix-time].
 
 
 ---
