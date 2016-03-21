@@ -49,7 +49,7 @@ The `function` accepts the following `options`:
 *   __token__: Github [access token][github-token] (*required*).
 *   __useragent__: [user agent][github-user-agent] `string`.
 *   __body__: issue content.
-*   __assignee__: Github username to which the issue should be assigned.
+*   __assignee__: Github username of assigned user.
 *   __milestone__: number of associated milestone.
 *   __labels__: `array` of associated labels.
 
