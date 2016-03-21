@@ -1,6 +1,6 @@
 {
   "name": "github-create-issue",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Create an issue on a Github repository.",
   "author": {
     "name": "Athan Reines",
