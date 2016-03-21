@@ -5,11 +5,10 @@ var createIssue = require( './../lib' );
 var opts = {
 	'token': '<your_token_goes_here>',
 	'useragent': 'beep-boop-bop',
-	'title': 'Big bug.',
 	'body': 'Beep boop.'
 };
 
-createIssue( 'kgryte/test-repo1', opts, clbk );
+createIssue( 'kgryte/test-repo1', 'Big bug.', opts, clbk );
 
 function clbk( error, issue, info ) {
 	if ( info ) {
