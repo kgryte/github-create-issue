@@ -189,7 +189,7 @@ tape( 'if a `port` option is not specified and the protocol is `http`, the defau
 	}
 });
 
-tape( 'function returns an error to a provided callback if an error is encountered when creating an issue', function test( t ) {
+tape( 'function returns an error to a provided callback if an error is encountered when creating an issue (no rate limit info)', function test( t ) {
 	var create;
 	var opts;
 
@@ -210,6 +210,39 @@ tape( 'function returns an error to a provided callback if an error is encounter
 	function done( error ) {
 		t.ok( error instanceof Error, 'error instance' );
 		t.equal( error.message, 'beep' );
+		t.end();
+	}
+});
+
+tape( 'function returns an error to a provided callback if an error is encountered when creating an issue (rate limit info)', function test( t ) {
+	var expected;
+	var create;
+	var opts;
+
+	create = proxyquire( './../lib/create.js', {
+		'./query.js': query
+	});
+
+	expected = info;
+
+	opts = getOpts();
+	create( 'beep/boop', 'Big bug.', opts, done );
+
+	function query( slug, title, opts, clbk ) {
+		setTimeout( onTimeout, 0 );
+		function onTimeout() {
+			clbk( new Error( 'beep' ), null, info );
+		}
+	}
+
+	function done( error, data, info ) {
+		t.ok( error instanceof Error, 'error instance' );
+		t.equal( error.message, 'beep' );
+
+		t.equal( data, null, 'data is null' );
+
+		t.deepEqual( info, expected, 'deep equal' );
+
 		t.end();
 	}
 });
@@ -264,39 +297,6 @@ tape( 'function returns rate limit info to a provided callback', function test( 
 
 	function done( error, data, info ) {
 		t.deepEqual( info, expected, 'deep equal' );
-		t.end();
-	}
-});
-
-tape( 'function returns rate limit info to a provided callback (error)', function test( t ) {
-	var expected;
-	var create;
-	var opts;
-
-	create = proxyquire( './../lib/create.js', {
-		'./query.js': query
-	});
-
-	expected = info;
-
-	opts = getOpts();
-	create( 'beep/boop', 'Big bug.', opts, done );
-
-	function query( slug, title, opts, clbk ) {
-		setTimeout( onTimeout, 0 );
-		function onTimeout() {
-			clbk( new Error( 'beep' ), null, info );
-		}
-	}
-
-	function done( error, data, info ) {
-		t.ok( error instanceof Error, 'error instance' );
-		t.equal( error.message, 'beep' );
-
-		t.equal( data, null, 'data is null' );
-
-		t.deepEqual( info, expected, 'deep equal' );
-
 		t.end();
 	}
 });
