@@ -1,0 +1,93 @@
+{
+  "name": "github-create-issue",
+  "version": "0.0.0",
+  "description": "Create an issue on a Github repository.",
+  "author": {
+    "name": "Athan Reines",
+    "email": "kgryte@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Athan Reines",
+      "email": "kgryte@gmail.com"
+    }
+  ],
+  "bin": {
+    "ghcreateissue": "./bin/cli",
+    "github-create-issue": "./bin/cli"
+  },
+  "scripts": {
+    "test": "if [ \"${TRAVIS}\" ]; then npm run test-ci; else npm run test-local; fi",
+    "test-local": "tape \"./test/*.js\" | tap-spec",
+    "test-ci": "npm run test-local && xvfb-run npm run test-browsers",
+    "test-cov": "istanbul cover --dir ./reports/coverage --report lcov tape -- \"./test/*.js\"",
+    "test-browsers": "browserify -p ./node_modules/proxyquire-universal ./test/*.js | testling | tap-spec",
+    "coverage": "istanbul cover --dir ./reports/codecov/coverage --report lcovonly tape -- \"./test/*.js\" && cat ./reports/codecov/coverage/lcov.info | codecov && rm -rf ./reports/codecov"
+  },
+  "main": "./lib",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kgryte/github-create-issue.git"
+  },
+  "keywords": [
+    "gh",
+    "git",
+    "github",
+    "create",
+    "issue",
+    "repo",
+    "repository",
+    "cli",
+    "utility",
+    "util",
+    "api",
+    "request",
+    "post"
+  ],
+  "bugs": {
+    "url": "https://github.com/kgryte/github-create-issue/issues"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "minimist": "^1.2.0",
+    "update-notifier": "^0.6.1",
+    "utils-copy": "^1.1.1",
+    "utils-json-parse": "^1.0.0",
+    "validate.io-function": "^1.0.2",
+    "validate.io-object": "^1.0.4",
+    "validate.io-string-primitive": "^1.0.0"
+  },
+  "devDependencies": {
+    "@kgryte/noop": "^1.0.0",
+    "browserify": "13.x.x",
+    "codecov": "1.x.x",
+    "istanbul": "^0.4.1",
+    "jshint": "2.x.x",
+    "jshint-stylish": "2.x.x",
+    "proxyquire": "^1.7.4",
+    "proxyquire-universal": "^1.0.8",
+    "proxyquireify": "^3.1.1",
+    "tap-spec": "4.x.x",
+    "tape": "4.x.x",
+    "testling": "1.x.x"
+  },
+  "testling": {
+    "files": [
+      "test/*.js"
+    ],
+    "browsers": [
+      "iexplore/6.0..latest",
+      "firefox/3.0..latest",
+      "firefox/nightly",
+      "chrome/4.0..latest",
+      "chrome/canary",
+      "opera/10.0..latest",
+      "opera/next",
+      "safari/4.0..latest",
+      "ipad/6.0..latest",
+      "iphone/6.0..latest",
+      "android-browser/4.2..latest"
+    ]
+  },
+  "license": "MIT"
+}
