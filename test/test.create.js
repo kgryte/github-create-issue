@@ -5,6 +5,7 @@
 var tape = require( 'tape' );
 var proxyquire = require( 'proxyquire' );
 var noop = require( '@kgryte/noop' );
+var merge = require( 'utils-merge2' );
 var create = require( './../lib/create.js' );
 
 
@@ -142,8 +143,9 @@ tape( 'if a `port` option is not specified and the protocol is `https`, the defa
 	var create;
 	var opts;
 
-	query = proxyquire( './../lib/create.js', {
-		'./query.js': query
+	create = proxyquire( './../lib/create.js', {
+		'./query.js': query,
+		'./validate.js': validate
 	});
 
 	opts = getOpts();
@@ -152,6 +154,10 @@ tape( 'if a `port` option is not specified and the protocol is `https`, the defa
 
 	create( 'beep/boop', 'Big bug.', opts, noop );
 
+	function validate( opts, options ) {
+		merge( opts, options );
+		return null;
+	}
 	function query( slug, title, opts ) {
 		t.equal( opts.port, 443, 'sets the default port to `443` for HTTPS' );
 		t.end();
@@ -162,8 +168,9 @@ tape( 'if a `port` option is not specified and the protocol is `http`, the defau
 	var create;
 	var opts;
 
-	query = proxyquire( './../lib/create.js', {
-		'./query.js': query
+	create = proxyquire( './../lib/create.js', {
+		'./query.js': query,
+		'./validate.js': validate
 	});
 
 	opts = getOpts();
@@ -172,8 +179,12 @@ tape( 'if a `port` option is not specified and the protocol is `http`, the defau
 
 	create( 'beep/boop', 'Big bug.', opts, noop );
 
+	function validate( opts, options ) {
+		merge( opts, options );
+		return null;
+	}
 	function query( slug, title, opts ) {
-		t.equal( opts.port, 80, 'sets the default port to `80` for HTTPS' );
+		t.equal( opts.port, 80, 'sets the default port to `80` for HTTP' );
 		t.end();
 	}
 });
@@ -192,7 +203,7 @@ tape( 'function returns an error to a provided callback if an error is encounter
 	function query( slug, title, opts, clbk ) {
 		setTimeout( onTimeout, 0 );
 		function onTimeout() {
-			clbk( new Error( 'beep' ), null, info );
+			clbk( new Error( 'beep' ) );
 		}
 	}
 
@@ -253,6 +264,39 @@ tape( 'function returns rate limit info to a provided callback', function test( 
 
 	function done( error, data, info ) {
 		t.deepEqual( info, expected, 'deep equal' );
+		t.end();
+	}
+});
+
+tape( 'function returns rate limit info to a provided callback (error)', function test( t ) {
+	var expected;
+	var create;
+	var opts;
+
+	create = proxyquire( './../lib/create.js', {
+		'./query.js': query
+	});
+
+	expected = info;
+
+	opts = getOpts();
+	create( 'beep/boop', 'Big bug.', opts, done );
+
+	function query( slug, title, opts, clbk ) {
+		setTimeout( onTimeout, 0 );
+		function onTimeout() {
+			clbk( new Error( 'beep' ), null, info );
+		}
+	}
+
+	function done( error, data, info ) {
+		t.ok( error instanceof Error, 'error instance' );
+		t.equal( error.message, 'beep' );
+
+		t.equal( data, null, 'data is null' );
+
+		t.deepEqual( info, expected, 'deep equal' );
+
 		t.end();
 	}
 });
