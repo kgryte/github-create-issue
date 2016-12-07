@@ -93,7 +93,7 @@ tape( 'if provided a `body` option which is not a primitive string, the function
 	t.end();
 });
 
-tape( 'if provided an `assignee` option which is not a primitive string, the function returns a type error', function test( t ) {
+tape( 'if provided an `assignees` option which is not a string array, the function returns a type error', function test( t ) {
 	var values;
 	var err;
 	var i;
@@ -104,7 +104,7 @@ tape( 'if provided an `assignee` option which is not a primitive string, the fun
 		null,
 		undefined,
 		true,
-		[],
+		'argonlaser',
 		{},
 		function(){}
 	];
@@ -112,7 +112,7 @@ tape( 'if provided an `assignee` option which is not a primitive string, the fun
 	for ( i = 0; i < values.length; i++ ) {
 		err = validate( {}, {
 			'token': 'abcdefg12345678',
-			'assignee': values[i]
+			'assignees': values[i]
 		});
 		t.ok( err instanceof TypeError, 'returns type error when provided ' + values[i] );
 	}
@@ -210,7 +210,7 @@ tape( 'the function returns `null` if all options are valid', function test( t )
 		'token': 'abcdefg12345678',
 		'useragent': 'beeper-booper',
 		'body': 'beep boop',
-		'assignee': 'kgryte',
+		'assignees': ['kgryte'],
 		'milestone': 123,
 		'labels': ['beep','boop','bop']
 	};

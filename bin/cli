@@ -84,8 +84,8 @@ if ( args.useragent ) {
 if ( args.body ) {
 	opts.body = args.body;
 }
-if ( args.assignee ) {
-	opts.assignee = args.assignee;
+if ( args.assignees ) {
+	opts.assignees = args.assignees.split( ',' );
 }
 if ( args.milestone ) {
 	opts.milestone = parseInt( args.milestone, 10 );

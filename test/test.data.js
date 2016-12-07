@@ -53,17 +53,17 @@ tape( 'the function sets the `body` field', function test( t ) {
 	t.end();
 });
 
-tape( 'the function sets the `assignee` field', function test( t ) {
+tape( 'the function sets the `assignees` field', function test( t ) {
 	var opts;
 	var out;
 
 	opts = setup();
-	opts.assignee = 'kgryte';
+	opts.assignees = ['kgryte'];
 
 	out = data( 'Big bug', opts );
 	out = JSON.parse( out );
 
-	t.equal( out.assignee, opts.assignee, 'sets the `assignee` field' );
+	t.deepEqual( out.assignees, opts.assignees, 'sets the `assignees` field' );
 	t.end();
 });
 
