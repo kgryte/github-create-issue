@@ -49,7 +49,7 @@ The `function` accepts the following `options`:
 *   __token__: Github [access token][github-token] (*required*).
 *   __useragent__: [user agent][github-user-agent] `string`.
 *   __body__: issue content.
-*   __assignee__: Github username of assigned user.
+*   __assignees__: Github usernames of assigned users.
 *   __milestone__: associated milestone `number`.
 *   __labels__: `array` of associated labels.
 
@@ -142,7 +142,7 @@ Options:
   -ua, --useragent ua              User agent.
        --title title               Issue title.
        --body content              Issue content.
-       --assignee username         Github username of assigned user.
+       --assignees user1,user2     Github usernames of assigned users.
        --milestone number          Associated milestone number.
        --labels label1,label2,...  Issue labels.
 ```
@@ -160,7 +160,7 @@ Options:
 Setting the access [token][github-token] using the command-line option:
 
 ``` bash
-$ DEBUG=* ghcreateissue beep/boop --title 'Big bug.' --token <token> 
+$ DEBUG=* ghcreateissue beep/boop --title 'Big bug.' --token <token>
 # => '{...}'
 ```
 
@@ -171,14 +171,14 @@ $ DEBUG=* GITHUB_TOKEN=<token> ghcreateissue beep/boop --title 'Big bug.'
 # => '{...}'
 ```
 
-For local installations, modify the command to point to the local installation directory; e.g., 
+For local installations, modify the command to point to the local installation directory; e.g.,
 
 ``` bash
 $ DEBUG=* ./node_modules/.bin/ghcreateissue beep/boop --title 'Big bug.' --token <token>
 # => '{...}'
 ```
 
-Or, if you have cloned this repository and run `npm install`, modify the command to point to the executable; e.g., 
+Or, if you have cloned this repository and run `npm install`, modify the command to point to the executable; e.g.,
 
 ``` bash
 $ DEBUG=* node ./bin/cli beep/boop --title 'Big bug.' --token <token>
