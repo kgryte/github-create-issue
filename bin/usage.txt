@@ -5,10 +5,10 @@ Options:
 
   -h,  --help                      Print this message.
   -V,  --version                   Print the package version.
-       --token token               Github access token.
+       --token token               GitHub access token.
   -ua, --useragent ua              User agent.
        --title title               Issue title.
        --body content              Issue content.
-       --assignees user1,user2     Github usernames of assigned users.
+       --assignees user1,user2,... GitHub usernames of assigned users.
        --milestone number          Associated milestone number.
        --labels label1,label2,...  Issue labels.

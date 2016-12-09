@@ -145,7 +145,7 @@ Options:
   -ua, --useragent ua              User agent.
        --title title               Issue title.
        --body content              Issue content.
-       --assignees user1,user2     GitHub usernames of assigned users.
+       --assignees user1,user2,... GitHub usernames of assigned users.
        --milestone number          Associated milestone number.
        --labels label1,label2,...  Issue labels.
 ```
