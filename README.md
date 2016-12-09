@@ -1,8 +1,8 @@
-Create Issue
-===
+# Create Issue
+
 [![NPM version][npm-image]][npm-url] [![Build Status][build-image]][build-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> [Create][github-create-issue] an issue on a Github repository.
+> [Create][github-create-issue] an issue on a GitHub repository.
 
 
 ## Installation
@@ -19,9 +19,10 @@ var createIssue = require( 'github-create-issue' );
 ```
 
 <a name="create-issue"></a>
+
 #### createIssue( slug, title, options, clbk )
 
-[Creates][github-create-issue] an issue on a Github repository.
+[Creates][github-create-issue] an issue on a GitHub repository.
 
 ``` javascript
 var opts = {
@@ -46,15 +47,15 @@ function clbk( error, issue, info ) {
 ```
 
 The `function` accepts the following `options`:
-*   __token__: Github [access token][github-token] (*required*).
+*   __token__: GitHub [access token][github-token] (*required*).
 *   __useragent__: [user agent][github-user-agent] `string`.
 *   __body__: issue content.
-*   __assignees__: Github usernames of assigned users.
+*   __assignees__: GitHub usernames of assigned users.
 *   __milestone__: associated milestone `number`.
 *   __labels__: `array` of associated labels.
 
 
-To [authenticate][github-oauth2] with Github, set the [`token`][github-token] option.
+To [authenticate][github-oauth2] with GitHub, set the [`token`][github-token] option.
 
 ``` javascript
 var opts = {
@@ -85,6 +86,7 @@ createIssue( 'kgryte/test-repo1', 'Big bug.', opts, clbk );
 
 
 ---
+
 ## Examples
 
 ``` javascript
@@ -118,6 +120,7 @@ __Note__: in order to run the example, you will need to obtain an access [token]
 
 
 ---
+
 ## CLI
 
 ### Installation
@@ -138,11 +141,11 @@ Options:
 
   -h,  --help                      Print this message.
   -V,  --version                   Print the package version.
-       --token token               Github access token.
+       --token token               GitHub access token.
   -ua, --useragent ua              User agent.
        --title title               Issue title.
        --body content              Issue content.
-       --assignees user1,user2     Github usernames of assigned users.
+       --assignees user1,user2     GitHub usernames of assigned users.
        --milestone number          Associated milestone number.
        --labels label1,label2,...  Issue labels.
 ```
@@ -187,6 +190,7 @@ $ DEBUG=* node ./bin/cli beep/boop --title 'Big bug.' --token <token>
 
 
 ---
+
 ## Tests
 
 ### Unit
@@ -233,6 +237,7 @@ $ make view-browser-tests
 
 
 ---
+
 ## License
 
 [MIT license](http://opensource.org/licenses/MIT).
