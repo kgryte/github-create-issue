@@ -7,14 +7,14 @@ var noop = require( '@kgryte/noop' );
 var Response = require( './response.js' );
 
 
-// REQUEST //
+// MAIN //
 
 /**
-* FUNCTION: create( ref, err[, statusCode] )
-*	Returns a mock HTTP request constructor.
+* Returns a mock HTTP request constructor.
 *
+* @private
 * @param {Object} ref - reference to parent object
-* @param {Error|Null} err - error object
+* @param {(Error|Null)} err - error object
 * @param {Number} [statusCode=201] - response status code
 * @returns {Request} mock HTTP request constructor
 */
@@ -22,9 +22,9 @@ function create( ref, err, statusCode ) {
 	statusCode = statusCode || 201;
 
 	/**
-	* FUNCTION: Request( opts, clbk )
-	*	Mock HTTP request constructor.
+	* Mock HTTP request constructor.
 	*
+	* @private
 	* @constructor
 	* @param {Object} opts - request options
 	* @param {Function} clbk - callback to invoke after receiving a response
@@ -45,11 +45,9 @@ function create( ref, err, statusCode ) {
 		return this;
 
 		/**
-		* FUNCTION: onTimeout()
-		*	Callback invoked in the next event loop.
+		* Callback invoked in the next event loop.
 		*
 		* @private
-		* @returns {Void}
 		*/
 		function onTimeout() {
 			if ( err ) {

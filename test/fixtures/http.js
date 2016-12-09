@@ -5,12 +5,12 @@
 var request = require( './request.js' );
 
 
-// HTTP //
+// MAIN //
 
 /**
-* FUNCTION: http( err[, statusCode] )
-*	Returns a mock `http` module.
+* Returns a mock `http` module.
 *
+* @private
 * @param {Error|Null} err - error object
 * @param {Number} [statusCode=201] - status code
 * @returns {Object} mock `http` module
