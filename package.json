@@ -54,7 +54,7 @@
   "dependencies": {
     "debug": "^2.2.0",
     "minimist": "^1.2.0",
-    "update-notifier": "^0.6.1",
+    "update-notifier": "^1.0.3",
     "utils-copy": "^1.1.1",
     "utils-json-parse": "^1.0.0",
     "validate.io-function": "^1.0.2",
