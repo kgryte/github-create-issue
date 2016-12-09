@@ -21,14 +21,13 @@ var args;
 // FUNCTIONS //
 
 /**
-* FUNCTION: onClose()
-*	Callback invoked upon writing a file to `stdout`.
+* Callback invoked upon writing a file to `stdout`.
 *
 * @private
 */
 function onClose() {
 	process.exit( 0 );
-}
+} // end FUNCTION onClose()
 
 
 // INIT //
@@ -95,19 +94,17 @@ if ( args.labels ) {
 }
 
 
-// CREATE ISSUE //
+// MAIN //
 
 create( args._[0], args.title, opts, clbk );
 
 /**
-* FUNCTION: clbk( error, issue, info )
-*	Callback invoked upon creating an issue.
+* Callback invoked upon creating an issue.
 *
 * @private
-* @param {Error|Null} error - error object
+* @param {(Error|null)} error - error object
 * @param {Object} issue - issue information
 * @param {Object} info - rate limit info
-* @returns {Void}
 */
 function clbk( error, issue, info ) {
 	if ( info ) {
@@ -119,4 +116,4 @@ function clbk( error, issue, info ) {
 	}
 	process.stdout.write( JSON.stringify( issue )+'\n', 'utf8' );
 	process.exit( 0 );
-}
+} // end FUNCTION clbk()
